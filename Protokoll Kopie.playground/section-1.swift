@@ -3,7 +3,7 @@
 import Cocoa
 import Foundation
 
-let berechnungsString = "123+456+789*2*4+9+6*2"
+let berechnungsString = "12+34*2+562"
 func parser(#stringZuParsen: String, mitWelchemSeparator separator: String, berechne:Bool = false) ->[String] {
     var stringZuParsenGeparst =  stringZuParsen.componentsSeparatedByString(separator)
     
@@ -29,13 +29,14 @@ var temparray = [Int]()
 for (index1, wort1) in enumerate(arrayOfWords) {
     if wort1.toInt() == nil {
         println ("String vor dem zweiten Parsen \n \(wort1)\n")
-        arrayOfWords2 += (parser(stringZuParsen: wort1, mitWelchemSeparator: "*", berechne: true))
+        arrayOfWords2 = (parser(stringZuParsen: wort1, mitWelchemSeparator: "*", berechne: true))
         temparray.append(index1)
-        arrayOfWords.removeAtIndex(index1)
         for i in arrayOfWords2 {
+            arrayOfWords.removeAtIndex(index1)
             arrayOfWords.insert(i, atIndex: index1)
         }
     }
 }
+println("Ergebniss2: \n \(arrayOfWords)\n")
 
-println(arrayOfWords)
+println("Das letzte Vorergebnis Lautet: \n \(arrayOfWords)\n")
