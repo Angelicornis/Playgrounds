@@ -3,79 +3,56 @@
 import Cocoa
 import Foundation
 
-let berechnungsString = "12+34*2+56:2"
-func parser(#stringZuParsen: String, mitWelchemSeparator separator: String, berechne:Bool = false) ->[String] {
-    var stringZuParsenGeparst = stringZuParsen.componentsSeparatedByString(separator)
-    if berechne {
-        var temp = 0
-        var ergebnis: Int?
-        var wert = ArrayWertAusgabe(vonWelchemArray: stringZuParsenGeparst, 0)
-        //var wertInt = wert!.toInt()
-        for wertInt in stringZuParsenGeparst {
-            switch separator {
-            case "*":
-                if ergebnis == nil {
-                    ergebnis = wert!.toInt()!
-                } else {
-                    ergebnis! *= wertInt.toInt()!
-                }
-            case ":":
-                if ergebnis == nil {
-                    ergebnis = wert!.toInt()!
-                } else {
-                    ergebnis! /= wertInt.toInt()!
-                }
-            default: ergebnis! = 0
+
+//extension Array {
+//    func isInArray<T>(thisArray: [T], thisCharakter char: Character) -> Bool {
+//        for value in self {
+//            for c in value {
+//                if c == "-" {
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//    }
+//}
+
+
+
+var array =  ["120", "30-50-20"]
+
+
+//array.isInArray(thisCharakter: "-")
+
+func isInArray<T>(thisArray: T, thisCharakter char: T) -> Bool {
+        for  c in thisArray {
+            if c == char {
+                return true
             }
         }
-        return ["\(ergebnis!)"]
-    } else {
-        return stringZuParsenGeparst
-    }
-}
-func ArrayWertAusgabe<T>(vonWelchemArray ausgewähltesArray: [T], index: Int) ->T? {
-    var ergebnis: T?
-    for (key, value) in enumerate(ausgewähltesArray) {
-        if key == index {
-            ergebnis = value
-        }
-    }
-    return ergebnis
+    return false
 }
 
-
-var arrayOfWords = parser(stringZuParsen: berechnungsString, mitWelchemSeparator: "+")
-println("Ergebniss1: \n \(arrayOfWords)\n")
-
-
-var arrayOfWords2 = [String]()
-var temparray = [Int]()
-for (index1, wort1) in enumerate(arrayOfWords) {
-    for c in wort1 {
-        if c == "*" {
-            println ("String vor dem zweiten Parsen * \n \(wort1)\n")
-            arrayOfWords2 = (parser(stringZuParsen: wort1, mitWelchemSeparator: "*", berechne: true))
-            temparray.append(index1)
-            for i in arrayOfWords2 {
-                arrayOfWords.removeAtIndex(index1)
-                arrayOfWords.insert(i, atIndex: index1)
-            }
-        } else if c == ":" {
-            println ("String vor dem zweiten Parsen : \n \(wort1)\n")
-            arrayOfWords2 = (parser(stringZuParsen: wort1, mitWelchemSeparator: ":", berechne: true))
-            temparray.append(index1)
-            for i in arrayOfWords2 {
-                arrayOfWords.removeAtIndex(index1)
-                arrayOfWords.insert(i, atIndex: index1)
-            }
+var temp = false
+for value in array {
+    for  c in value {
+        if c == "-" {
+            temp = true
         }
     }
 }
-println("Ergebniss2: \n \(arrayOfWords)\n")
 
-println("Das letzte Vorergebnis Lautet: \n \(arrayOfWords)\n")
-var ergebnis = 0
-for i in arrayOfWords {
-    ergebnis += i.toInt()!
+if temp {
+    println ("Ja")
 }
-println("Das Ergebnis Lautet: \n \(ergebnis)\n")
+
+
+
+
+
+
+
+
+
+
+
